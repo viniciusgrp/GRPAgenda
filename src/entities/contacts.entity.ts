@@ -9,11 +9,11 @@ class Contact {
     @Column()
     name: string
 
-    @Column({unique: true})
+    @Column()
     email: string
 
     @Column()
-    telephone: number
+    telephone: string
 
     @Column()
     linkedin: string
@@ -21,7 +21,7 @@ class Contact {
     @CreateDateColumn()
     createdAt: Date
 
-    @ManyToOne(() => Client, (client) => client.contacts)
+    @ManyToOne(() => Client, (client) => client.contacts, {onDelete: 'CASCADE'})
     client: Client
 }
 

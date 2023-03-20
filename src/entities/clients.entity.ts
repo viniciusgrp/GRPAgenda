@@ -17,7 +17,7 @@ class Client {
     password: string
     
     @Column()
-    telephone: number
+    telephone: string
     
     @Column()
     linkedin: string

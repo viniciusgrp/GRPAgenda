@@ -4,6 +4,7 @@ import { createClientService } from '../services/clients/createClient.service'
 import { deleteClientService } from '../services/clients/deleteClientService.service'
 import { getAllClientsService } from '../services/clients/getAllClients.service'
 import { getClientService } from '../services/clients/getSpecificClient.service'
+import { updateClientService } from '../services/clients/updateClient.service'
 
 export const createClientController = async (req: Request, res: Response) => {
     const userData: IClientRequest = req.body
@@ -25,4 +26,13 @@ export const getClientController = async (req: Request, res: Response) => {
 export const deleteClientController = async (req: Request, res: Response) => {
     await deleteClientService(req.params.id)
     return res.status(204).send()
+}
+
+export const updateClientController = async (req: Request, res: Response) => {
+    const dataToUpdate: IClientUpdate = req.body
+
+    const foundUser = res.locals.foundUser
+
+    const updatedUser = await updateClientService(dataToUpdate, foundUser, req.params.id)
+    return res.status(200).json(updatedUser)
 }

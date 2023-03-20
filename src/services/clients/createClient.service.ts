@@ -1,4 +1,4 @@
-import { createClientSerializer } from './../../schemas/clients.schema';
+import { createClientSerializer } from '../../schemas/clients.schema';
 import { AppDataSource } from '../../data-source'
 import Client from '../../entities/clients.entity'
 import AppError from '../../errors/AppError'
@@ -16,7 +16,7 @@ export const createClientService = async (userData: IClientRequest): Promise<Cli
         const createdClient = clientsRepository.create(clientDataValidated)
         await clientsRepository.save(createdClient)
 
-        delete createdClient.password
+        // delete createdClient.password
 
         return createdClient
     } catch (error: any) {

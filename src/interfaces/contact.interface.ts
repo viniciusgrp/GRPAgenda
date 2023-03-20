@@ -1,17 +1,16 @@
-interface IClientRequest {
+interface IContactRequest {
     name: string,
     email: string,
-    password: string,
     telephone: string,
     linkedin: string,
+    client: string
 }
 
-interface IClientUpdate {
+interface IContactUpdate {
     name?: string,
     email?: string,
-    password?: string,
     telephone?: string,
     linkedin?: string,
 }
 
-export { IClientRequest, IClientUpdate }
+export { IContactRequest, IContactUpdate }
