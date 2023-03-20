@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import 'express-async-errors'
 import express, { Request, Response } from 'express'
-import handleError from './error/handleError'
+import handleError from './errors/handleError'
 
 const app = express()
 app.use(express.json())
