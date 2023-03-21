@@ -18,7 +18,6 @@ export const updateClientService = async (dataToUpdate: IClientUpdate, foundUser
             name: validatedDataToUpdate.name || foundUser.name,
             telephone: validatedDataToUpdate.telephone || foundUser.telephone,
             linkedin: validatedDataToUpdate.linkedin || foundUser.linkedin,
-            password: validatedDataToUpdate.password || foundUser.password
         })
 
         const numberId = Number(id)

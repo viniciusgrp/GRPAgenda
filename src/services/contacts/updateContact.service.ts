@@ -1,15 +1,17 @@
 import Contact from '../../entities/contacts.entity'
 import AppError from '../../errors/AppError'
 import {AppDataSource} from '../../data-source'
-import { updateClientSerializer } from '../../schemas/clients.schema'
+import { updateContactSerializer } from '../../schemas/contact.schema'
 import { IContactUpdate } from '../../interfaces/contact.interface'
 
 export const updateContactService = async (dataToUpdate: IContactUpdate, foundUser: Contact, id: string) => {
     try {
-        const validatedDataToUpdate = await updateClientSerializer.validate(dataToUpdate, {
+        const validatedDataToUpdate = await updateContactSerializer.validate(dataToUpdate, {
             abortEarly: false,
             stripUnknown: true
         })
+
+        console.log('aqui ===============', validatedDataToUpdate)
 
         const contactRepository = AppDataSource.getRepository(Contact)
 

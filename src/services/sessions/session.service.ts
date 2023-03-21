@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import { compare } from 'bcryptjs'
-import Client from '../../entities/clients.entity'
+import User from '../../entities/user.entity'
 import { ISessionRequest } from '../../interfaces/session.interface'
 import { sessionSerializer } from '../../schemas/session.schemas'
 import { AppDataSource } from '../../data-source'
@@ -10,7 +10,7 @@ import jwt from 'jsonwebtoken'
 export const sessionService = async (clientData: ISessionRequest): Promise<{ token: string }> => {
     try {
 
-        const clientsRepository = AppDataSource.getRepository(Client)
+        const clientsRepository = AppDataSource.getRepository(User)
 
         const client = await clientsRepository.findOneByOrFail({email: clientData.email})
 

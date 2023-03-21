@@ -6,7 +6,7 @@ import { ensureIsValidForPatchMiddleware } from '../middleware/ensureIsValidForP
 
 const clientRoutes = Router()
 
-clientRoutes.post('', createClientController)
+clientRoutes.post('', ensureAuthMiddleware, createClientController)
 clientRoutes.get('', getAllClientsController)
 clientRoutes.get('/:id', getClientController)
 clientRoutes.delete('/:id', deleteClientController)

@@ -1,49 +1,39 @@
-import {hashSync} from 'bcryptjs'
-import { BeforeInsert, BeforeRemove, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import Contact from './contacts.entity'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import Contact from "./contacts.entity";
+import User from "./user.entity";
 
-@Entity('clients')
+@Entity("clients")
 class Client {
-    @PrimaryGeneratedColumn()
-    id: number
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string
+  @Column()
+  name: string;
 
-    @Column({unique: true})
-    email: string
+  @Column()
+  email: string;
 
-    @Column()
-    password: string
-    
-    @Column()
-    telephone: string
-    
-    @Column()
-    linkedin: string
+  @Column()
+  telephone: string;
 
-    @Column({default: true})
-    isActive: boolean
-    
-    @CreateDateColumn()
-    createdAt: Date
+  @Column()
+  linkedin: string;
 
-    @DeleteDateColumn()
-    deletedAt: Date
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @BeforeRemove()
-    isActiveChanged() {
-        this.isActive = false
-    }
+  @ManyToOne(() => User, (user) => user.clients, { onDelete: "CASCADE" })
+  user: User;
 
-    @BeforeUpdate()
-    @BeforeInsert()
-    hashPassword() {
-        this.password = hashSync(this.password, 10)
-    }
-
-    @OneToMany(() => Contact, (contact) => contact.client)
-    contacts: Contact[]
+  @OneToMany(() => Contact, (contact) => contact.client)
+  contacts: Contact[];
 }
 
-export default Client
+export default Client;

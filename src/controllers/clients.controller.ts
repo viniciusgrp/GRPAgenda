@@ -9,7 +9,7 @@ import { updateClientService } from '../services/clients/updateClient.service'
 export const createClientController = async (req: Request, res: Response) => {
     const userData: IClientRequest = req.body
 
-    const createdUser = await createClientService(userData)
+    const createdUser = await createClientService(userData, req.user.id)
     return res.status(201).json(createdUser)
 }
 
