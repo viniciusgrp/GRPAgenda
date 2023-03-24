@@ -4,14 +4,20 @@ import AppError from '../../errors/AppError'
 import {AppDataSource} from '../../data-source'
 import { updateClientSerializer } from '../../schemas/clients.schema'
 
-export const updateClientService = async (dataToUpdate: IClientUpdate, foundUser: Client, id: string) => {
+export const updateClientService = async (dataToUpdate: IClientUpdate, id: string) => {
     try {
         const validatedDataToUpdate = await updateClientSerializer.validate(dataToUpdate, {
             abortEarly: false,
             stripUnknown: true
         })
 
+        const numId = Number(id)
+
         const clientRepository = AppDataSource.getRepository(Client)
+
+        const foundUser = await clientRepository.findOneByOrFail({id: numId})
+
+        console.log("ID", numId, "CLIENTE", foundUser)
 
         await clientRepository.update(id, {
             email: validatedDataToUpdate.email || foundUser.email,
@@ -20,10 +26,8 @@ export const updateClientService = async (dataToUpdate: IClientUpdate, foundUser
             linkedin: validatedDataToUpdate.linkedin || foundUser.linkedin,
         })
 
-        const numberId = Number(id)
-
         const updatedUser = await clientRepository.findOneBy({
-            id: numberId
+            id: numId
         })
 
         return updatedUser

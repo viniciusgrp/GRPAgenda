@@ -31,8 +31,6 @@ export const deleteClientController = async (req: Request, res: Response) => {
 export const updateClientController = async (req: Request, res: Response) => {
     const dataToUpdate: IClientUpdate = req.body
 
-    const foundUser = res.locals.foundUser
-
-    const updatedUser = await updateClientService(dataToUpdate, foundUser, req.params.id)
+    const updatedUser = await updateClientService(dataToUpdate, req.params.id)
     return res.status(200).json(updatedUser)
 }
