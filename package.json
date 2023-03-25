@@ -9,7 +9,9 @@
   },
   "scripts": {
     "typeorm": "typeorm-ts-node-commonjs",
-    "dev": "ts-node-dev --ignore-watch node_modules src/server.ts"
+    "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@nestjs/config": "^2.3.1",
